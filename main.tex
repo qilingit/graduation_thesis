@@ -1,0 +1,763 @@
+\documentclass[12pt]{article}
+\usepackage{natbib}     % package utilisé pour la partie de référence
+\usepackage[french]{babel}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage[T1]{fontenc}
+
+%Configuration pour les code insérer
+\usepackage{listings}
+%\usepackage{color}
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{black},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+%\setcounter{secnumdepth}{4}
+%\titleformat{\paragraph}
+
+% utiliser pour faire annexe
+\usepackage{appendix}
+
+% make a clibable table of content
+\usepackage[colorlinks=false]{hyperref}
+
+%Includes "References" in the table of contents
+\usepackage[nottoc]{tocbibind}
+\usepackage{float} % utiliser cet package pour insérer les figures, permet de mettre juste après le texte
+
+% Ce package est pour définir les couleurs de texte
+\usepackage{xcolor}
+
+%1 est la marge gauche
+%2 est la marge en haut
+%3 est la marge droite
+%4 est la marge en bas
+%5 fixe la hauteur de l’entête
+%6 fixe la distance entre l’entête et le texte
+%7 fixe la hauteur du pied de page
+%8 fixe la distance entre le texte et le pied de page
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{2 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{\textbf{Rapport de projet de fin d'études :\newline \newline Automatisation de Test fonctionnel}}    % Title
+\author{ZHANG Qilin}		% Author
+\date{Semptembre 2019}											% Date
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\theauthor}
+\lhead{\thetitle}
+\cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+    \vspace*{0.5 cm}
+    \includegraphics[scale = 0.15]{Logo_officiel_Sorbonne_University}\\[0.8 cm]	% University Logo
+    \includegraphics[scale = 0.15]{SAP_R_grad.jpg}
+    \textsc{\LARGE Sorbonne Université}\\[2.0 cm]	% University Name
+	\textsc{\Large Master 2 Science et Technologie du Logiciel\\2018 - 2019}\\[0.5 cm]		% Course Code
+	%\textsc{\large Développement d'Application Réticulaire }\\[0.5 cm]	% Course Name
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{ \huge \bfseries \thetitle}\\
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushleft} \large
+			\emph{Etudiants:}\\
+			\theauthor
+			\end{flushleft}
+			\end{minipage}~
+			\begin{minipage}{0.4\textwidth}
+			\begin{flushright} \large
+			\emph{Responsable:} \\
+			Romain Demangeon, Marwan Ghanem % Your Student Number
+		\end{flushright}
+	\end{minipage}\\[0.5 cm]
+	
+	{\large \thedate}\\[2 cm]
+ 
+	\vfill
+	
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Introduction}
+
+
+Dans le cadre du projet du cours « Développement d’Applications Réticulaires », nous avons choisi de développer une application web basée sur un réseau social nommée « DarBoxOffice ».
+
+Pour choisir le cadre de l’application, nous nous sommes intéressés au cinéma qui est un de nos centres d’intérêt commun. Nous avons aussi choisi ce thème car il existe une API riche en donnée.
+En effet les données qui sont renvoyées par chaque appel  sont simple à comprendre.
+
+L’objectif de cette application est de permettre à des utilisateurs de trouver des films et de les commenter, de s’échanger des messages privés et de trouver des films sans critère particulier.
+
+Dans ce rapport, nous allons présenter cette application, sa conception et son implantation. Nous décrirons ainsi le résultat obtenu
+
+%%%%%%%%%%%%%%%%%%%%Manuel d'utilisation%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Manuel d'utilisation}
+
+\subsection{Présentation de l'application}
+DarBoxOffice est une application sociale se hébergée sur \textbf{Heroku.com} en utilisant \textbf{TheMovieDB API} avec fonctionnalités cinématiques et sociales, elle permet à utilisateur de \begin{itemize}
+    \item Créer un compte
+    \item Se connecter
+    \item Se déconnecter
+    \item Trouver d'autre utilisateur
+    \item Discuter avec d'autre utilisateur
+    \item Chercher des films par critères
+    \item Commenter un film
+    \item Afficher les films aléatoirement
+\end{itemize}
+\subsubsection{Description de l'interface}
+Au début de projet, nous avons conçu une maquette par l'outil \textbf{Balsamiq Mockups 3} pour décrire tous les aspects et comportements d'application, nous avons développé notre application en inspirant cette maquette. Cette maquette est consultable dans la partie Annexe  \hyperref[Annexe-Maquette]{\ref*{Annexe-Maquette}}. 
+\paragraph{Balsamiq Mockups} Balsamiq Mockups est une maquette et création de site filaire application avec une interface graphique d'utilisateur, il permet au concepteur d’organiser des widgets prédéfinis à l’aide d’un éditeur WYSIWYG glissé-déposé.\cite{Balsamiq-Mockups}
+%%%% Utilisation de Référence : https://tex.stackexchange.com/questions/320620/bibliography-producing-extra-number-at-the-end
+
+
+
+\paragraph{Page d'accueil}
+\leavevmode \\
+L'utilisateur accède au site \url{https://dar-box-office.herokuapp.com} pour accéder les services fournis par l'application. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{mainPage.png}
+    \caption{Page principale de l'application}
+    \label{fig:App_mainPag}
+\end{figure}
+
+\paragraph{Créer un compte}
+\leavevmode \\
+ Sur la page d'accueil, l'utilisateur peut créer un compte, il suffit juste de  fournir une adresse mail et un mot de passe
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{signup.png}
+    \caption{Page d'inscription}
+    \label{fig:AppInscription}
+\end{figure}
+\paragraph{Se connecter}
+\leavevmode \\
+L'utilisateur peut se connecter à l'application avec son adresse mail comme identifiant et le mot de passe correspondant.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{signin.png}
+    \caption{Se connecter}
+    \label{fig:App_signin}
+\end{figure}
+
+\paragraph{Modifier le profil}
+\leavevmode \\
+L'utilisateur peut modifier son profil en accédant le menu 'Paramètre' de l'application.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{modifyProfil.png}
+    \caption{Modifier le profil d'utilisateur}
+    \label{fig:App_ModifProfil}
+\end{figure}
+
+\paragraph{Trouver d'autres utilisateurs}
+\leavevmode \\
+L'utilisateur peut rechercher d'autres utilisateurs en saisissant leur nom, s'il n'existe pas, il n'y a rien à afficher.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{findFriend.png}
+    \caption{Chercher d'autre utilisateur}
+    \label{fig:App_findFriend}
+\end{figure}
+Sinon le système affiche le profil de l'utilisateur trouvé
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{resultFindFriend.png}
+    \caption{Résultat de recherche d'autre utilisateur}
+    \label{fig:App_resultFriendFind}
+\end{figure}
+
+\paragraph{Discuter avec autre utilisateur} 
+\leavevmode \\
+Utilisateur peut commencer un chat  avec un autre utilisateur et  consulter son profil sur le profil d'utilisateur.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{sendMessage.png}
+    \caption{Discuter avec d'autre utilisateur}
+    \label{fig:App_sendMessage}
+\end{figure}
+
+
+\paragraph{Chercher des films par critères} 
+\leavevmode \\
+  L'utilisateur peut faire une recherche de films avec un ou plusieurs critères.
+    \begin{itemize}
+        \item Par mots clefs
+        \item Par genre ( Exemple Action , Adventure etc)
+        \item Par titre de film ( Exemple Titanic)
+        \item Par date de sortie
+    \end{itemize}
+    
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{filmSearchType.png}
+    \caption{Recherche films avec critères}
+    \label{fig:App_searchFilmWithCrit}
+\end{figure}
+Si il n'existe pas de film correspondant aux critères dans la base de donnée une liste vide est renvoyée
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{findFilm-Noresult.png}
+    \caption{Résultats de recherche de films - Non films}
+    \label{fig:App_searchFilmNoResult}
+\end{figure}
+Sinon il y aura des films correspondent aux critères à afficher.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{findFilmResltat.png}
+    \caption{Résultats de recherche de films - Contient films}
+    \label{fig:App_searchFilmWithResult}
+\end{figure}
+
+\paragraph{Commenter un film} 
+\leavevmode \\
+L'utilisateur peut aussi commenter un film
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{filmCommentary.png}
+    \caption{Commenter un film}
+    \label{fig:App_ComentaryFilm}
+\end{figure}
+\paragraph{Afficher films aléatoirement} 
+\leavevmode \\
+L'utilisateur peut clique le bouton 'Just give me movie please' pour obtenir les films aléatoires.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{filmAlea.png}
+    \caption{Afficher les films aléatoirement}
+    \label{fig:App_filmAlea}
+\end{figure}
+
+% Les cas d'utilisation
+\subsection{Cas d'utilisation}
+On a trois acteurs dans notre application : visiteur, utilisateur qui a créé le compte et le système(backend). Voici les cas d'utilisations pour ces trois acteurs : 
+
+%%%%%%%%%%%%%%%% Visiteur %%%%%%%%%%%%%%%%%
+\subsubsection{Visiteur}
+\begin{figure}[H]
+    \centering
+    \includegraphics{useCase_visitor.png}
+    \caption{Cas d'utilisation d'un visiteur}
+    \label{fig:useCas_visitor}
+\end{figure}
+\paragraph{Créer un compte}
+% \leavevmode permet d'avoir un \\ aprèse cette ligne, because it is in vertical mode
+% https://tex.stackexchange.com/questions/4690/error-message-theres-no-line-here-to-end
+\leavevmode
+\\
+\textbf{Nom :} Créer un compte\\
+\textbf{Description :} Permet à un visiteur de créer un compte afin d'accéder et utiliser application \\
+\textbf{Acteur: } Visiteur\\
+\textbf{Pré-condition : } Application est accessible \\
+\textbf{Post-condition : } Un compte est créé pour visiteur\\
+\textbf{Scénario nominal : }
+\begin{enumerate}
+    \item L'utilisateur saisit son adresse mail comme identifiant
+    \item Le système récupérer l'identifiant et le vérifier
+    \item L'utilisateur saisit le mot de passe
+    \item L'utilisateur clique sur le bouton de création de compte
+    \item Le système récupère le mot de passe, le vérifier.
+    \item Le système affiche la page d'accueil de l'application, sauvegarde l'identifiant et mot de passe dans la base de données
+\end{enumerate}
+
+\textbf{Enchaînements alternatifs : }
+\begin{description}
+    \item \textbf{A1. Adresse mail déjà existe sur le système : }\\
+    A l'étape 2 du scénario nominal, le système détecte que l'adresse mail est déjà existe, le système ne donne pas l'autorisation au visiteur de s'inscrire, retourne à l'étape 1 du scénario nominal.   
+\end{description}
+
+\textbf{Enchaînements d'exceptions : }
+\begin{description}
+    \item \textbf{E1. Mot de passe erroné :} \\ 
+    A l'étape 5 du scénario nominal, le système détecte que le mot de passe ne passe pas les règles de vérification(nombre de caractère supérieur de 3, au moins un caractère, un chiffre, un symbole), retourne à l'étape 3 du scénario nominal.
+\end{description}
+
+%%%%%%%%%%%%% Système %%%%%%%%%%%%%%%
+\subsubsection{Système}
+\begin{figure}[H]
+    \centering
+    \includegraphics{useCase_system.png}
+    \caption{Cas d'utilisation de système}
+    \label{fig:useCase_system}
+\end{figure}
+
+\paragraph{Afficher les films aléatoirement}
+\leavevmode \\
+\textbf{Nom :} Afficher les films aléatoirement\\
+\textbf{Description :} Permet d'afficher des films récupérés à partir de API aléatoirement sur la page d'accueil  \\
+\textbf{Acteur :} Système\\
+\textbf{Pré-condition : } Utilisateur est connecté sur l'application \\
+\textbf{Post-condition : } Des film aléatoires sont affichés sur la page d'accueil d'utilisateur\\
+\textbf{Scénario nominal : }
+\begin{enumerate}
+    \item L'utilisateur réussit à se connecter à l'application
+    \item Le système récupère des films aléatoirement à partir de API, les affiche dans la page d'accueil de l'application
+\end{enumerate}
+\paragraph{Détecter les commentaires spam}
+\leavevmode \\
+\textbf{Nom :} Détecter les commentaires spam\\
+\textbf{Description :} Permet de détecter les commentaires spam, renvoyer une indication à l'utilisateur à la place des commentaires spam\\
+\textbf{Acteur :} Système\\
+\textbf{Pré-condition : } Utilisateur a commenté sur un film\\
+\textbf{Post-condition : } Les commentaires spam sont détectés, elles sont remplies par une indication\\
+\textbf{Scénario nominal : }
+\begin{enumerate}
+	\item L'utilisateur réussit à se connecter à l'application
+	\item Le système récupère ces commentaires
+	\item Ls système détecte qu'il a des mots insultes dans les commentaires
+	\item Le système remplace ces commentaire par "votre commentaire contient des mots insultes, je ne peux pas afficher.
+\end{enumerate}
+
+
+%%%%%%%%%%%%% Utilisateur %%%%%%%%%%%%%%%
+\subsubsection{Utilisateur}
+\begin{figure}[H]
+	\centering
+	\includegraphics{useCase_user.png}
+	\caption{Cas d'utilisation d'un utilisateur}
+	\label{fig:my_label}
+\end{figure}
+\paragraph{Se connecter}
+\leavevmode \\
+\textbf{Nom :} Se connecter \\
+\textbf{Description :}Permet à l’utilisateur de se connecter à l’application\\
+\textbf{Auteur : } Utilisateur\\
+\textbf{Précondition} : L’utilisateur n’est pas connecté à l’application, et il a compte d'application\\
+\textbf{Post-condition} : L’utilisateur est connecté à l’application\\
+\textbf{Scénario nominal :}
+\begin{enumerate}
+    \item L'utilisateur saisit son adresse mail comme identifiant
+	\item Le système récupérer l'identifiant et le vérifier
+	\item L'utilisateur saisit le mot de passe
+	\item L'utilisateur clique sur le bouton de connecter
+	\item Le système récupère le mot de passe, le vérifier.
+	\item Le système affiche la page d'accueil de l'application
+\end{enumerate}
+
+\textbf{Enchaînement d’exception :}
+\begin{description}
+	\item \textbf{E1. Le compte d'utilisateur n'existe pas dans le système}\\
+	A l’étape 2 du scénario nominal, le système trouve qu'il n'y a pas le compte sur la base de données, il ne peut pas transférer les informations vers le serveur. Il affiche un message d’erreur. Retourne à l’étape 1 du scénario nominal.
+	\item \textbf{E2. Le mot de passe ne correspond pas avec l'identifiant}\\
+	A l’étape 5 du scénario nominal, le système détermine que les le mot de passe n’est pas correctement saisit : retour à l’étape 3 du scénario nominal.\\
+\end{description}
+
+
+% Cas d'utilisation 
+\paragraph{Se déconnecter}
+\leavevmode \\
+\textbf{Nom :} Se déconnecter\\
+\textbf{Description :} Permet à l'utilisateur de l'application se déconnecter\\
+\textbf{Acteur: } Utilisateur\\
+\textbf{Pré-condition : } L'utilisateur est connecté à l'application \\
+\textbf{Post-condition : } L'utilisateur est déconnecté à l'application, la page de connexion et s'inscrire est affichée\\
+\textbf{Scénario nominal : }
+\begin{enumerate}
+    \item L'utilisateur clique sur le bouton de déconnexion
+    \item Le système s'arrête la communication avec cet utilisateur, s'arrête les services fournis à cet utilisateur
+    \item Le système affiche la page de connexion et inscription de l'application
+\end{enumerate}
+
+
+%%%%%%%%%%%Modification de profil
+\paragraph{Modifier son profil}
+\leavevmode \\
+\textbf{Nom :} Modifier son profil\\
+\textbf{Description :} Permet à l'utilisateur de modifier son profil\\
+\textbf{Acteur: } Utilisateur\\
+\textbf{Pré-condition : } L'utilisateur est connecté à l'application \\
+\textbf{Post-condition : } Des modifications sont prises en comptes par l'application, elles sont sauvegardées dans la base de donnée\\
+\textbf{Scénario nominal : }
+\begin{enumerate}
+    \item L'utilisateur clique sur le bouton de modification profil
+    \item Le système charge les informations et éléments nécessaire au profil d'utilisateur
+    \item L'utilisateur fait les modifications, puis clique sur le bouton de sauvegarder
+    \item Le système sauvegarde les modifications
+\end{enumerate}
+
+\textbf{Enchaînements alternatifs}
+\begin{description}
+    \item \textbf{A1. Utilisateur ne clique pas sur le bouton d'enregistrement}\\
+    A l'étape 3 du scénario nominal, si l'utilisateur ne clique pas sur le bouton d'enregistrement de modification, les modifications ne seront pas sauvegarder dans la base donnée, selon l'étape d'utilisateur, le système va reprendre le scénario nominal d'autres cas d'utilisations.
+\end{description}
+
+\paragraph{Accéder à la liste de ces films en favoris}
+\leavevmode \\
+\textbf{Nom :} Accéder à la liste des films en favoris\\
+\textbf{Description :} Permets à l'utilisateur d'accéder à la liste de ses films en favoris \\
+\textbf{Acteur: } Utilisateur\\
+\textbf{Pré-condition : } Utilisateur est connecté à l'application\\
+\textbf{Post-condition : } La liste des films d'utilisateur est affichée au format d'arborescence dans le profil d'utilisateur\\
+\textbf{Scénario nominal : }
+\begin{enumerate}
+    \item L'utilisateur accède dans son profil
+    \item L'utilisateur clique sur le bouton d'afficher la liste des films qui sont en favoris
+    \item Le système cherche dans la base de données les films en favoris correspondants à cet utilisateur, et les affiche au format d'arborescence sur le profil d'utilisateur.
+\end{enumerate}
+
+
+\paragraph{Rechercher films avec des critères}
+\leavevmode \\
+\textbf{Nom :} Rechercher films avec des critères\\
+\textbf{Description :} Permet à l'utilisateur de faire une recherche de film avec un ou plusieurs critères \\
+\textbf{Acteur: } Utilisateur\\
+\textbf{Pré-condition : } Utilisateur est connecté à l'application\\
+\textbf{Post-condition : } Des films sont affichés dans le dashboard de recherche de film\\
+\textbf{Scénario nominal : }
+\begin{enumerate}
+    \item L'utilisateur accède dans le dashboard de recherche de film
+    \item L'utilisateur choisit un ou plusieurs critères, et fait la recherche
+    \item Le système cherche dans la base de données les films qui correspondent les critères, et les affiche dans le dashboard de recherche de film.
+\end{enumerate}
+
+
+\paragraph{Commenter un film}
+\leavevmode \\
+\textbf{Nom :} Commenter un film\\
+\textbf{Description :} Permets à l'utilisateur de commenter un film \\
+\textbf{Acteur: } Utilisateur\\
+\textbf{Pré-condition : } Utilisateur est connecté à l'application, et il a ouvert un affiche de film pour lire\\
+\textbf{Post-condition : } Des films sont affichées au-dessous de film\\
+\textbf{Scénario nominal : }
+\begin{enumerate}
+    \item L'utilisateur rédige ses commentaires
+    \item L'utilisateur clique sur le bouton 'submit' pour soumettre ses commentaires
+    \item Le système affiche les commentaires au-dessous d'un film
+\end{enumerate}
+
+\textbf{Enchaînements alternatifs : }
+\begin{description}
+    \item \textbf{A1. L'utilisateur ne clique pas sur le bouton 'submit' : }\\
+    A l'étape 2 du scénario nominal, l'utilisateur ne clique pas sur le bouton 'submit' afin de soumettre ses commentaires, on va reprendre aux d'autres étapes nominales selon utilisateur.   
+\end{description}
+
+
+\textbf{Chercher un utilisateur}\\
+\leavevmode \\
+\textbf{Nom :} Chercher un utilisateur\\
+\textbf{Description :} Permets à l'utilisateur de trouver un utilisateur de l'application\\
+\textbf{Acteur: } Utilisateur\\
+\textbf{Pré-condition : } Utilisateur est connecté à l'application\\
+\textbf{Post-condition : } Le profil d'un utilisateur est affiché dans le dashboard de cherche d'utilisateur\\
+\textbf{Scénario nominal : }
+\begin{enumerate}
+    \item L'utilisateur saisit le nom d'utilisateur et cliquer sur le boutton 'chercher'
+    \item Le système cherche dans la base de données l'utilisateur correspond au nom saisit
+    \item Le système affiche le profil d'utilisateur dans le dashboard de cherche d'utilisateur
+\end{enumerate}
+
+\textbf{Enchaînements alternatifs : }
+\begin{description}
+    \item \textbf{A1. L'utilisateur ne clique pas sur le bouton 'chercher' : }\\
+    A l'étape 1 du scénario nominal, l'utilisateur ne clique pas sur le bouton 'chercher' afin de faire une recherche d'utilisateur, on va reprendre aux d'autres étapes nominales selon utilisateur.   
+\end{description}
+
+\textbf{Enchaînements d'exceptions : }
+\begin{description}
+    \item \textbf{E1. Nom d'utilisateur saisit n'existe pas dans la base de données:} \\ 
+    A l'étape 2 du scénario nominal, le système détecte que le nom d'utilisateur n'existe pas dans la base de données, le système afficher un message d'erreur dans la dashboard "Cet utilisateur n'existe pas dans la base donnée", reprend le scénario nominal à l'étape 1.
+\end{description}
+
+\paragraph{Envoyer un message privé à l'autre utilisateur}
+\leavevmode \\
+\textbf{Nom :} Envoyer un message privé à l'autre utilisateur\\
+\textbf{Description :} Permets à l'utilisateur d'envoyer un message privé à l'autre utilisateur\\
+\textbf{Acteur: } Utilisateur\\
+\textbf{Pré-condition : } L'utilisateur est dans le profil d'un autre utilisateur\\
+\textbf{Post-condition : } Le message privé est bien envoyé à l'autre utilisateur\\
+\textbf{Scénario nominal : }
+\begin{enumerate}
+    \item Dans le profil d'utilisateur destinataire, l'utilisateur rédige un message privé dans le dialogue de conversation.
+    \item L'utilisateur clique sur le bouton 'envoyer' afin d'envoyer le message privé
+    \item Le système récupère ce message et l'envoie à l'utilisateur destinataire.
+\end{enumerate}
+
+\textbf{Enchaînements alternatifs : }
+\begin{description}
+    \item \textbf{A1. L'utilisateur ne clique pas sur le bouton 'envoyer' : }\\
+    A l'étape 2 du scénario nominal, l'utilisateur ne clique pas sur le bouton 'envoyer' afin d'envoyer le message, on va reprendre aux d'autres étapes nominales selon utilisateur.   
+\end{description}
+
+\newpage
+\section{Conception et Développement d'application}
+
+
+
+%Architecture
+\subsection{Architecture}
+\subsubsection{Architecture Globale}
+Dans cette partie nous allons vous présenter nos principaux composants, la figure ci-dessous montre la structure de notre application.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{archtecture.png}
+    \caption{Architecture générale d'application}
+    \label{fig:archiApplication}
+\end{figure}
+
+
+\subsubsection{Frontend}
+Dans cette partie nous allons vous présenter nos principaux composants, la figure ci-dessous montre la structure de notre application.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{archtectureFrontend.png}
+    \caption{ La structure Frontend de l'application}
+    \label{fig:my_label}
+\end{figure}
+\paragraph{Nos composants : }
+Nous avons des composants dans un dossier components et voici leur utilité :
+\begin{itemize}
+    \item \textbf{HelloWorld :}\\
+	Ce composant est le premier composant appelé, en effet c’est ce composant qui permet l’authentification d’une personne ou de son inscription. Ce composant appelle le servlet de connexion en lui transmettant l’email et le mot de passe. Pour l’inscription une vérification est faite du coté client c’est celle de l’égalité entre le mot de passe et la confirmation du mot de passe afin de ne pas déranger inutilement le serveur.
+	\item \textbf{HomeProfile :}\\
+	Ce composant montre le cœur de métier de l’application : il permet de faire des recherches de film où dans demande au hasard et affiche les films retourner, il affiche aussi le composant SideBar dans tous les cas et Commentaire si une recherche a été effectuée.
+	\item \textbf{Messagerie :} \\
+	Ce composant permet de communiqué des messages avec d’autres utilisateurs. Il est possible de trouver les utilisateurs en fonction de leurs noms. Ainsi il est possible d’écrire un message et de voir les messages échangés ayant eu lieu avec le composant Chat.
+	\item\textbf{ Paramètre :} \\
+	Ce composant permet d’ajouté des préférences dans les genres de films. Ces préférences auront une influence si l’utilisateur recherche des films au hasard.
+    \item \textbf{Commentaire : } \\
+    Ce composant prend en paramètre l’identifiant d’un film est permet d’affiche les commentaires d’utilisateur sur ce film et ainsi qu’à un utilisateur d’en écrire un qui sera par la suite visible aux autres.
+    \item \textbf{Chat :}\\
+	Ce composant permet de voir les messages entre deux utilisateurs, en effet elle permet de voir les messages envoyé, les messages reçu et le chat qui montre les messages envoyé et reçu dans l’ordre chronologique d’écriture.
+    \item \textbf{SideBar :}\\
+	Ce composant se retrouve dans les trois « page » de l’application car en effet c’est lui qui permet le routage entre HomeProfile, Messagerie et Paramètre.
+    \item \textbf{App.vue}\\
+    Qui n’est pas dans le dossier components permet justement l’affichage puisqu’il est le composant appelé par index.html et qui ne dispose que d’un bouton qui est celui de la déconnexion. Ce bouton déconnexion n’est disponible que si une personne c’est connecté car lors d’une connexion l’email de l’utilisateur est stocké dans sessionStorage et c’est la présence d’une adresse email qui permet de déterminé si un utilisateur et connecté et de savoir qui est connecté.
+\end{itemize}
+
+
+\subsubsection{Backend}
+
+\paragraph{Architecture}\leavevmode \\
+Dans ce projet nous avons décidé de mettre en place pour le Backend un serveur REST. Nous avons fait appel au Framework Hibernate et adopté le modele  MVC. Bien que REST n'exige l'utilisation d'aucun modèle spécifique, l'utilisation du modèle MVC est tout à fait naturelle si la ressource ou le modèle RESTful est exposé via un contrôleur. La vue dans notre cas sera une représentation JSON du modèle.
+\paragraph{}
+L'un des intérêts de l'intégration de ces différents Hibernate et le modele MVC  est de permettre la mise en place d'une architecture rigoureuse, de manière à garantir la maintenabilité, l'évolutivité et l'exploitabilité de l'application. La figure ci-dessous montre l'architecture qui a été mise en place dans le cadre de ce projet, cette architecture et largement admise comme la plus efficace et généralisable à n'importe quel projet Web.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{back-end.png}
+    \caption{Architecture générale du serveur au niveau Back-end}
+    \label{fig:archiApplication}
+\end{figure}
+
+
+La principale caractéristique de cette architecture est la séparation des préoccupation  (Données, Métier et Présentation) grâce à la séparation stricte des couches applicatives. En effet on peut observer les  rois couches de l'application :
+\begin{description}
+    \item [Couche DAO :] : permet les accès à la base de données à travers le Framework Hibernate.
+    \\
+    \item [Couche Métier :] contient l'ensemble du code service de l'application, elle organise les accès à la couche DAO et ses aspects transactionnels.
+    \\
+    \item [Couche Présentation :] cette couche représente pour nous  le JSON renvoyé par le serveur.
+\end{description}
+\newpage
+
+Les couches sont rigoureusement séparées les unes des autres en ce sens qu'il ne doit exister idéalement aucune dépendance entre elles. Ainsi chaque couche ne connaît que les interfaces de la couche inférieure. Par exemple la couche métier ne connaît que les interfaces de la couche DAO. Ce qui assure que chaque couche publie via ses interfaces l'ensemble des traitements qu'elle met à la disposition des couches supérieurs.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics
+    [scale=0.7]{back-end-1.png}
+    \caption{Architecture générale du serveur au niveau Back-end}
+    \label{fig:archiApplication}
+\end{figure}
+%Choix de technologie
+\subsection{Choix des technologies et les justifications}
+\subsubsection{Frontend}
+\paragraph{} \leavevmode \\
+Pour coder la partie client, nous nous sommes basés sur VueJS, HTML et les classes CSS offerte par W3School. Nous avons choisi ces technologies dans un but pédagogique, en effet nous voulions apprendre de nouveaux outils qu’aucun d’entre nous n’avait appris à utiliser auparavant. La difficulté fut donc de maîtriser VueJS.
+\paragraph{}
+VueJS est un Framework JavaScript open-source utilisé pour construire des interfaces clients. Ce Framework nous a fortement intéresse car il permet de faire une interface client et des applications web monopage, mais en donnant l’impression qu’il y a plusieurs page notamment en modifiant l’url à chaque appel du router. Ce Framework est aussi utilisé par Netflix, Gitlab, Adobe ou le site de vente en ligne Alibaba
+
+\paragraph{}
+VueJS utilise une syntaxe de modèle base sur du HTML qui permet de lier le DOM aux instances d’un composant VueJS. Les scripts sont simplement des codes JavaScript qui vont influer sur les templates à l’aide de variables écrites dans le Data et au méthode d’instance écrite dans Methods. La partie script est écrite à la JSON, par exemple pour déclarer des variables, il faut faire
+\paragraph{}
+\begin{lstlisting}
+Data : {
+    Donnee1 : '',
+    Donnee2 : 5
+    Donnee3 : []
+}
+
+\end{lstlisting}
+
+\paragraph{}
+Ici nous pouvons voir que la variable “Donnee1” est une chaine de caractère, que la  “Donnee2” est un nombre entier et que la “Donnee3” est un tableau.
+
+
+\subsubsection{Backend}
+\paragraph{Environnement et outils de développement}
+\begin{description}
+    \item \textbf{Eclipse :} \newline
+    Eclipse est un environnement de développement intégré (IDE) utilisé dans la programmation informatique et l'IDE Java le plus utilisé. Il contient un espace de travail de base et un système extensible de plug-in pour personnaliser l'environnement. Eclipse est écrit principalement en Java et son utilisation principale est pour le développement d'applications Java.
+    \newline
+   \item \textbf{Apache Tomcat :}    \newline
+   Apache Tomcat, souvent appelé Tomcat Server, est un conteneur de servlets Java open source développé par Apache Software Foundation (ASF). Tomcat implémente plusieurs spécifications Java EE, y compris Java Servlet, JavaServer Pages (JSP) et WebSocket, et fournit un environnement de serveur web http « Java pur » dans lequel le code Java peut s’exécuter.
+\newline
+    \item \textbf{Système de gestion de base de données « PostgreSQL » :} \newline
+    PostgreSQL est un système de gestion de bases de données relationnelles (SGBDR) fonctionnant sous Windows et Linux. Il fait partie des logiciels de gestion de base des données les plus utilisées au monde, autant par le grand public (applications web principalement) que par des professionnels.
+    \newline
+    \item \textbf{Maven :} \newline
+    Maven est un outil de construction de projets (build) open source développé par la fondation Apache, initi lement pour les besoins du projet Jakarta Turbine. Il permet de faciliter et d'automatiser certaines tâches de la gestion d'un projet Java. Il permet notamment :
+    \begin{itemize}
+       
+     \item Automatiser certaines tâches : compilation, tests unitaires et déploiement des applications  qui composent le projet.
+     \item  de gérer des dépendances vis-à-vis des bibliothèques nécessaires au projet.
+     \item  de générer des documentations concernant le projet.
+     
+    \end{itemize}
+    
+    
+    \item \textbf{ Framework hibernate/jpa :} \newline
+    Les entreprises s’orientent de plus en plus vers des architectures n-tiers. La technologie JEE et les Framework  offrent beaucoup d’outils pour répondre aux besoins modernes. Pour la couche présentation, on trouve par exemple, le plus populaire Struts respectant le modèle MVC de séparation de code, de l’interface et des données. Nous allons,  cependant, nous intéressé à une couche plus basse d’une architecture applicative, la couche d’accès aux données. Celle-ci permet d’interfacer le code métier avec une source des données. L’intérêt est de pouvoir changer de base de données en n’ayant besoin de ne modifier que la couche d’accès. Pour réaliser cette tâche, il existe plusieurs solutions fournies par J2EE qui sont appelé JPA (Java Persistance API). Ce mécanisme qui gére la correspondance entre des objets d’une  application et les tables de base des données se nomme ORM (Object-Relationnal Mapping). Pou  cela, on a pris la décision d’utiliser Hibernate comme un Framework ORM. On a pris le choix d’utiliser Hibernate car :
+    \begin{itemize}
+        \item Génère le code SQL nécessaire, ce qui rend l’application plus portable.
+        \item  La persistance est transparente.
+        \item  La récupération des données est optimisée.
+        \item  Probabilité du code en cas de changement de la base des données.
+    \end{itemize}
+    \end{description}
+\paragraph{API Utilisé} \leavevmode \\
+L'API utilisé dans le cadre de ce projet est l'API TheMovieDB. Movie Database (TMDb) est une base de données collaborative sur les films. La base de donnée initiale était un don du projet gratuit Open Media Database (omdb). TMDb est un projet concurrent de la base de données commerciale Internet Movie Database et peut être utilisé par le logiciel de centre multimédia Kodi.
+
+\subsubsection{Hébergement}
+
+Un site internet sans hébergement c’est comme une voiture sans roue, une maison sans toit.
+
+Nous avons déployé nos deux serveurs Front-end et Back-end sur la plateforme  Heroku
+Notre choix s’est porté sur cette plateforme pour les raisons suivantes : 
+
+\begin{itemize}
+   \item Elle n'est pas totalement gratuite mais la partie gratuite est largement suffisante dans le cadre de cette exercice.
+   \\
+    \item Elle facilite la gestion et le monitoring de l’application : en effet, il est possible d’agir sur toutes les informations de l’application et de les paramétrer afin d’obtenir un hébergement qui soit personnalisé en fonction de nos besoins. 
+    \\
+    \item Elle permet de suivre l’état et la disponibilité de notre application grâce au tableau de bord qu’elle met en place. Ce dernier contient des indicateurs d’état qui permettent de voir les statistiques essentielles en un clin d’oeil telles que : le nombre de requêtes HTTP, le nombre d’erreurs HTTP.
+\end{itemize}
+
+\subsection{Sécurité}
+La sécurisation de notre application web étant très importante. Certes, elle contient des
+données peu sensibles mais ayant trait à la vie privée des utilisateurs, c’est
+pour cette raison que nous avons pris les quelques mesures suivantes visant à pallier aux
+problématiques de sécurité. Même si ces mesures sont loin d’être parfaite.
+
+\subsubsection{Hashage des mots de passe}
+Le hashage de mot de passe est l'une des pratiques de sécurité les plus basiques qui doit
+être effectuée. Sans cela, chaque mot de passe stocké peut être volé si notre base de données
+est compromise. C’est pour cela que nous avons décidé d’appliquer un hashage sur le mot de
+passe avant de le stocker afin de rendre la tâche d'un attaquant difficile pour connaitre le mot
+de passe original.
+\subsubsection{Sécurisation de l'accès à notre Back-end}
+Il s'agit de limiter l'accès à  notre Back-end qu' a notre Frontend .
+ Pour ce faire, nous avons mis en place un mécanisme de filtre d’autorisation sur les servlets pour assurer une sécurisation fine des URLs de l’application. 
+\subsection{Gestion de projet et découpage de tâche}
+\subsubsection{Gestion de projet}
+Cette année est notre dernière année de formation académique avant d'entamer notre vie professionnel, C'est pour cette raison que nous avons essayé de travailler avec la  \textbf{Méthode Agile - SCRUM} que nous avons appris dans un autre cours \guillemotleft \space GPSTL \guillemotright, nous avons décidé d'appliquer cette méthode et travailler en SCRUM pour ce projet. 
+
+\paragraph{Trello}
+Nous avons utilisé Trello pour la gestion de projet, Trello est un outil de gestion de projet en ligne, lancé en septembre 2011, et inspiré par la méthode Kanban de Toyota. Il est basé sur une organisation des projets en planches listant des cartes, chacune représentant des tâches. Les cartes sont assignables à des utilisateurs et sont mobiles d'une planche à l'autre, traduisant leur avancement.\cite{Trello}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{trello-organProjet.png}
+    \caption{Organisation du projet avec Trello}
+    \label{fig:App_Trello_organPorjet}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{trello-scrumProjet.png}
+    \caption{Travaille en SCRUM avec Trello}
+    \label{fig:App_TrelloScrum}
+\end{figure}
+
+\paragraph{Slack} Nous avons utilisé Slack pour discuter et échanger les codes quand nous devons travailler à distance. 
+\paragraph{Github} Nous avons utilisé Github pour gérer le développement et le control de version. Nous avons créé des repositories pour notre projet, 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{gitBackend.png}
+    \caption{Github repositories partie Backend}
+    \label{fig:App_Github_Backend}
+\end{figure}
+
+
+\newpage
+\section{Axes d'amélioration}
+
+\begin{itemize}
+    \item 
+
+A cause de retard du projet, nous n'avons pas pu  une \textbf{UI} très jolie. 
+\\
+
+\item
+Absence de tests : n’ayant pas beaucoup de temps, nous n’avons pas pu mettre en
+place un plan de tests rigoureux pour nous assurer du bon fonctionnement de notre
+application ;
+\end{itemize}
+
+
+
+\section{Conclusion du projet}
+ Pour conclure, ce projet nous a beaucoup apporté dans le domaine du développement web. Nous avons rencontrés plusieurs difficultés tout au long de ce projet.
+\paragraph{}
+Au tout début de projet, nous voulons faire un projet de pari sur les possibles retard des trains SNCF ou des Métro en Ile de France en utilisant SNCF API qui est générer par l’entreprise Navitia, mais après beaucoup d’essai et recherche sur Internet, nous avons trouvé que cette API ne peut pas nous fournir des informations viable sur des retards, donc nous avons décidé de recommencer le projet au bout de 4 semaines. Pour enfin faire le projet que nous venons de présenter.
+
+
+
+
+\newpage
+\bibliographystyle{plain}
+\bibliography{biblist}
+
+
+
+
+
+\newpage
+\section{Annexe}
+\appendix
+\section{Maquette faite avec Balsamiq Mockups 3}
+\label{Annexe-Maquette}
+\href{https://drive.google.com/file/d/13S1_j926OpUDYI9evYTFl-aJDEXmhMbn/view?usp=sharing}{\underline{Lien pour maquette d'application}}
+\begin{center}
+    \includegraphics[width=\textwidth]{maquette_mainPage.png}
+\end{center}
+
+\end{document}
