@@ -47,6 +47,7 @@
 % Ce package est pour définir les couleurs de texte
 \usepackage{xcolor}
 
+\usepackage{vmargin}
 %1 est la marge gauche
 %2 est la marge en haut
 %3 est la marge droite
@@ -57,9 +58,9 @@
 %8 fixe la distance entre le texte et le pied de page
 \setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{2 cm}{1.5 cm}{1 cm}{1.5 cm}
 
-\title{\textbf{Rapport de projet de fin d'études :\newline \newline Automatisation de Test fonctionnel}}    % Title
+\title{\textbf{Rapport de projet de fin d'études\newline Automatisation de Test fonctionnel}}    % Title
 \author{ZHANG Qilin}		% Author
-\date{Semptembre 2019}											% Date
+\date{Septembre 2019}											% Date
 
 \makeatletter
 \let\thetitle\@title
@@ -69,9 +70,12 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\rhead{\theauthor}
-\lhead{\thetitle}
-\cfoot{\thepage}
+\rhead{\leftmark}
+\lhead{Sorbonne Université Master 2 STL\newline \theauthor}
+\usepackage{lastpage}
+\cfoot{Page \thepage \ sur\ \pageref{LastPage}}
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\footrulewidth}{1pt}
 
 \begin{document}
 
@@ -85,9 +89,9 @@
     \textsc{\LARGE Sorbonne Université}\\[2.0 cm]	% University Name
 	\textsc{\Large Master 2 Science et Technologie du Logiciel\\2018 - 2019}\\[0.5 cm]		% Course Code
 	%\textsc{\large Développement d'Application Réticulaire }\\[0.5 cm]	% Course Name
-	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	\rule{\linewidth}{0.8 mm} \\[0.6 cm]
 	{ \huge \bfseries \thetitle}\\
-	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	\rule{\linewidth}{0.8 mm} \\[2.6 cm]
 
 	\begin{minipage}{0.4\textwidth}
 		\begin{flushleft} \large
@@ -97,8 +101,8 @@
 			\end{minipage}~
 			\begin{minipage}{0.4\textwidth}
 			\begin{flushright} \large
-			\emph{Responsable:} \\
-			Romain Demangeon, Marwan Ghanem % Your Student Number
+			\emph{Tuteurs:} \\
+			Camilla CHRISTIANSEN, Sebastien COUDRAY % Your Student Number
 		\end{flushright}
 	\end{minipage}\\[0.5 cm]
 	
@@ -109,22 +113,36 @@
 \end{titlepage}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\setcounter{tocdepth}{3}
 \tableofcontents
 \pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Remerciements}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Introduction}
 
 
-%%%%%%%%%%%%%%%%%%%%Manuel d'utilisation%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\section{Manuel d'utilisation}
+\section{Présentation d'entreprise}
+SAP SE (\textit{\textbf{S}ysteme, \textbf{A}nwendungen und \textbf{P}rodukte in der Datenverarbeitung}, "\textbf{S}ystems, \textbf{A}pplications \& \textbf{P}roducts in Data Processing") est une entreprise qui conçoit et vend des logiciels, notamment des systèmes de gestion et de maintenance, principalement à destination des entreprises et des institutions dans le monde entier. SAP est une entreprise internationale et sont siège se trouve à Waldorf, Allemagne, SAP est le premier éditeur de logiciels en Europe et le quatrième dans le monde.
 
-\subsection{Présentation de l'application}
+\subsection{Histoire}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Présentation du produit}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Contenu de mon travail}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion du projet}
 \paragraph{}
 
@@ -135,7 +153,7 @@
 
 \newpage
 \section{Annexe}
-\appendix
+\newpage
 \section{Maquette faite avec Balsamiq Mockups 3}
 \label{Annexe-Maquette}
 \href{https://drive.google.com/file/d/13S1_j926OpUDYI9evYTFl-aJDEXmhMbn/view?usp=sharing}{\underline{Lien pour maquette d'application}}
