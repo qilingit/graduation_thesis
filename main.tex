@@ -1,8 +1,9 @@
 \documentclass[12pt]{article}
-\usepackage{natbib}     % package utilisé pour la partie de référence
+\usepackage[square,numbers]{natbib}     % package utilisé pour la partie de référence
+\bibliographystyle{plain}
+\usepackage[utf8x]{inputenc}
 \usepackage[french]{babel}
 \usepackage{url}
-\usepackage[utf8x]{inputenc}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \graphicspath{{images/}}
@@ -113,7 +114,7 @@
 \end{titlepage}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\setcounter{tocdepth}{3}
+\setcounter{tocdepth}{2} % Set the depth of table of contents
 \tableofcontents
 \pagebreak
 
@@ -132,7 +133,20 @@
 SAP SE (\textit{\textbf{S}ysteme, \textbf{A}nwendungen und \textbf{P}rodukte in der Datenverarbeitung}, "\textbf{S}ystems, \textbf{A}pplications \& \textbf{P}roducts in Data Processing") est une entreprise qui conçoit et vend des logiciels, notamment des systèmes de gestion et de maintenance, principalement à destination des entreprises et des institutions dans le monde entier. SAP est une entreprise internationale et sont siège se trouve à Waldorf, Allemagne, SAP est le premier éditeur de logiciels en Europe et le quatrième dans le monde.
 
 \subsection{Histoire}
+    \subsubsection{1972-1980: Les jeunes années}
+    En 1972, 5 anciens employés d'IBM - Dietmar Hopp, Hans-Werner Hector, Hasso Plattner, Klaus E. Tschira, et Claus Wellenreuther - fondaient Systems Applications and Products in Data Processing (Systèmes, Applications et Progiciels), à Mannheim, en Allemagne. S'appuyant sur le rêve de l'informatique «temps réel»: un logiciel qui traite les données lorsque les clients en ont besoin plutôt que de passer la nuit à la volée. SAP a délivré la release SAP R/1 en 1973.
 
+    \subsubsection{1981-1990 : Le SAP R/2}
+    Le temps réel touche davantage l’activité: les processus d’application logicielle mainframe packagés SAP R/2 intègrent l’ensemble des fonctions commerciales d’une entreprise.
+
+    \subsubsection{1991-2000 : Le SAP R/3}
+    Temps réel sur le bureau: une version client-serveur du logiciel d'application standard permet aux entreprises de fonctionner plus efficacement dans le monde entier.
+    \subsubsection{2001-2010 : Des données en temps réel où et quand vous en avez besoin}
+    Real-time moves to the Web and beyond: Cloud computing, mobile, and in-memory computing open up new horizons for real-time data access – anywhere.
+    
+    \subsubsection{2011-Présent : Résultats d'enregistrement des supports de prise en charge en mémoire, en nuage et en réseau d'entreprise}
+    La croissance continue de l'entreprise est tirée par la plate-forme en mémoire SAP HANA qui permet aux analyses de données ultra-rapides de devenir une réalité. Des acquisitions stratégiques associées à une innovation continue font de SAP un leader des réseaux d’informatique en nuage et du commerce électronique. Avec le lancement de SAP S / 4HANA et de SAP C / 4HANA, SAP dévoile la nouvelle génération de logiciels d'entreprise destinés à aider les clients à devenir des entreprises intelligentes.
+    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \section{Présentation du produit}
@@ -147,16 +161,12 @@ SAP SE (\textit{\textbf{S}ysteme, \textbf{A}nwendungen und \textbf{P}rodukte in 
 \paragraph{}
 
 \newpage
-\bibliographystyle{plain}
 \bibliography{biblist}
-
 
 \newpage
 \section{Annexe}
 \newpage
-\section{Maquette faite avec Balsamiq Mockups 3}
-\label{Annexe-Maquette}
-\href{https://drive.google.com/file/d/13S1_j926OpUDYI9evYTFl-aJDEXmhMbn/view?usp=sharing}{\underline{Lien pour maquette d'application}}
+
 %\begin{center}
 %    \includegraphics[width=\textwidth]{maquette_mainPage.png}
 %\end{center}
