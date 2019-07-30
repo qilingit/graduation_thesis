@@ -1,0 +1,75 @@
+%Rajouter la ligne "Annexes" dans le sommaire
+\addcontentsline{toc}{part}{Annexes}
+
+\begin{appendix}
+\section{Annexe des codes}
+    \subsection{Multi-Thread pour la comparaison des pdf}
+    \label{appendix: multi-thread_compare_pdf}
+    \begin{lstlisting}
+    	// First Thread - Ref
+		Thread_PDF_To_PNG thread_one = null;		
+		try
+		{
+			thread_one = new Thread_PDF_To_PNG(1,bar,GeneralFuncs.normalizePath(ref_filePath));
+			es.execute(thread_one);			
+		}
+		catch (Exception e)
+		{
+			throw new Exception("Cannot proceed with PDF extraction to PNG. " + e.getMessage());
+		}
+		es.isTerminated();
+		// Second Thread - Res
+		Thread_PDF_To_PNG thread_two=null;
+		try
+		{
+			thread_two = new Thread_PDF_To_PNG(2,bar,GeneralFuncs.normalizePath(res_filePath));
+			es.execute(thread_two);
+			
+		} catch (Exception e)	{
+			throw new Exception("Cannot proceed with PDF extraction to PNG. " + e.getMessage());
+		}
+		try	{
+			// Wait for the end of two thread
+			System.out.println("Wait for the end of multi-thread pdf extraction");
+			bar.await(); 
+			bar = null;
+		} catch (InterruptedException ex)		{ 
+			throw new Exception("Error Message : " + ex.getMessage());
+		}
+    
+    \end{lstlisting}
+    
+    \newpage
+    \subsection{Lambda Expression pour comparaison entre deux répertoires}
+    \label{appendix:lambda_compare_towFolder}
+    \begin{lstlisting}
+	public static void compareFolderRefAndSrc(String refFolder, String srcFolder) throws Exception
+	{
+		TestLogger.getInstance().beginCheckpoint("Ref folder: " + refFolder + " - Src foler: " + srcFolder);
+		
+		try
+		{
+			Path dirRef = Paths.get(refFolder);
+			Path dirSrc = Paths.get(srcFolder);
+			
+			// filter the .pdf file
+			List<Path> listRefPath = Files.list(dirRef)
+					.filter(f -> f.toString().endsWith(".pdf"))
+					.collect(Collectors.toList());
+			
+			for (int ii = 0; ii < listRefPath.size(); ii++)
+			{
+				Path refPath = listRefPath.get(ii);
+				Path srcPath = Files.list(dirSrc).filter(path -> path.getFileName().equals(refPath.getFileName())).findFirst().get();
+				comparePDF(refPath.toString(), srcPath.toString());
+			}
+		}
+		catch (Exception e)
+		{
+			TestLogger.getInstance().logError(e.getMessage());
+		}
+		
+		TestLogger.getInstance().endCheckpoint();
+	}
+    \end{lstlisting}
+\end{appendix}
