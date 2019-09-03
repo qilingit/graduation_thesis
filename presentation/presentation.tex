@@ -53,7 +53,7 @@
         }
         
         \titlepage
-        \footnotesize Tuteur D'entreprise: Camilla CHRISTIANSEN, Sébastien COUDRAY \\
+        \footnotesize Tuteur d'entreprise: Camilla CHRISTIANSEN, Sébastien COUDRAY \\
 Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
     \end{frame}
     
@@ -105,9 +105,9 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
         %%%%%% Frame 2 %%%%%%
         \begin{frame}
             \frametitle{SAP Produits et Slogan}
-            \begin{columns}
+            \begin{columns}[t]
             \column{0.7\textwidth}
-                    8 Catégories des produits en globales : 
+                    \textbf{8 Catégories des produits} en globales : 
                     \begin{itemize}
                         \item ERP et coeur numérique
                         \item Gestion de la relation client et expérience client
@@ -119,7 +119,7 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
                         \item Technologies intelligentes
                     \end{itemize}
             \column{0.3\textwidth}
-            SAP Slogan : \\ The Best run SAP
+            \textbf{SAP Slogan :} \\ The Best run SAP
             \flushleft
             \includegraphics[width=\textwidth]{SAP_Best_R_grad_blk.jpg}
             \end{columns}
@@ -131,7 +131,7 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
         \end{frame}
         
         %%%%%% Frame 4 %%%%%%
-        \begin{frame}
+        \begin{frame}[t]
             \frametitle{SAP Financial Consolidation}
             \begin{block}{SAP Financial Consolidation}
             \begin{itemize}
@@ -143,7 +143,8 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
             \end{block}
         \end{frame}
         
-        \begin{frame}
+        %%%%%% Frame 5 %%%%%%
+        \begin{frame}[t]
             \begin{columns}
                 \column{0.5\textwidth}
                 \begin{figure}
@@ -165,12 +166,13 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
         \end{frame}
         
         \subsection{Introduction d'équipe}
-        %%%%%% Frame 4 %%%%%%
+        %%%%%% Frame 6 %%%%%%
         \begin{frame}
         \frametitle{Organisation d'équipe et mon rôle}
             \begin{block}{Rôle et Mission}
             \begin{itemize}
                 \item Apprenti Ingénieur de Qualité, intégré à l'équipe P\&I S/4HANA LoB Finance France, partie Test de sous-équipe FC
+                \item Equipe plus de 40 personnes, travaillent en méthode d'Agile
                 \item Automatiser des scénarios de tests fonctionnels et de non-régression
             \end{itemize}
             
@@ -178,37 +180,26 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
             \includegraphics[width=\textwidth]{role_organisation.jpg}
         \end{frame}
         
-        \begin{frame}
-        \frametitle{Organisation d'équipe et mon rôle}
-            \begin{block}{Rôle et Mission}
-                \begin{itemize}
-                    \item Equipe plus de 40 personnes, travaillent en méthode d'Agile
-                \end{itemize}
-            \end{block}
-            \centering
-            \includegraphics[width=8cm]{organisation_groupe.jpg}
-        \end{frame}
-        
     \section{Contexte et la problématique}
         \subsection{SAP Financial Consolidation}
-        %%%%%% Frame 5 %%%%%%
+        %%%%%% Frame 7 %%%%%%
         \begin{frame}
             \frametitle{Architecture de SAP Financial Consolidation}
             \includegraphics[width=0.84\textwidth]{FC_Globale_Architecture.png}
         \end{frame}
         
-        %%%%%% Frame 6 %%%%%%
-        \begin{frame}
+        %%%%%% Frame 8 %%%%%%
+        \begin{frame}[t]
         \frametitle{Différentes versions du client}
             \begin{description}
                 \item [Client Windows Desktop :] Client installer sur Windows
                 \item [Client Legacy Web :] Client version Web avant l'utilisation de HTML5
-                \item [Client HTML5 Web :] Client version Web avec l'utilisation de HTML5, nouvelle UX, sortie depuis pour FC 10.1 à partir de 2015, continuer à développer les nouvelles fonctionnalités et faire les maintenances.
+                \item [Client HTML5 Web :] Client version Web avec l'utilisation de HTML5, nouvelle UX, sortie depuis FC 10.1 à partir de 2015, continuer à développer les nouvelles fonctionnalités et faire les maintenances.
             \end{description}
         \end{frame}
         
-        %%%%%% Frame 7 %%%%%%
-        \subsection{Test régression et Test non-régression}
+        %%%%%% Frame 9 %%%%%%
+        \subsection{Test de nouvelles fonctionnalités et Test non-régression}
         \begin{frame}
             \frametitle{Le cycle de Build - Test - Release}
             \begin{columns}
@@ -217,7 +208,7 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
                 \includegraphics[width=8cm]{cycle_build_release.png}
                 
                 \column{0.4\textwidth}
-                Différentes branches : 
+                \textbf{Différentes branches :} 
                 \begin{itemize}
                     \item Core: Toutes les fonctionnalités
                     \item PI : La version à tester
@@ -228,10 +219,10 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
         
         
         
-        %%%%%% Frame 8 %%%%%%
-        \begin{frame}
+        %%%%%% Frame 10 %%%%%%
+        \begin{frame}[t]
             \frametitle{Deux types de Test}
-            \begin{block}{Test de régression}
+            \begin{block}{Test de nouvelles fonctionnalités}
                 Test fonctionnel sur des nouvelles fonctionnalités ou les corrections des Bugs
             \end{block}
             
@@ -248,7 +239,7 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
         
         \subsection{Test d'impression}
         
-        %%%%%% Frame 9 %%%%%%
+        %%%%%% Frame 11 %%%%%%
         \begin{frame}
             \frametitle{Problématique de Test d'impression}
             \begin{itemize}
@@ -265,8 +256,9 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
                 
         \end{frame}
         
-        %%%%%% Frame 10 %%%%%%
-        \begin{frame}{Etat de l'art}
+        %%%%%% Frame 12 %%%%%%
+        \begin{frame}[t]
+            \frametitle{Etat de l'art}
             \begin{block}{Etat de travail}
                 \begin{itemize}
                     \item Avant mon arrive, l'équipe a fait ce test manuellement. Facile d’être fatigué faces aux scénarios répétés, perdre beaucoup de temps. 
@@ -282,7 +274,7 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
             \end{block}
             
         \end{frame}
-        
+         %%%%%% Frame 13 %%%%%%
         \begin{frame}{Choix des technologies pour le Projet Test-Auto}
             \begin{block}{Silk Test, Selenium dans future}
                 \begin{itemize}
@@ -305,7 +297,7 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
         \end{frame}
     \section{Travaux Réalisés}
         \subsection{Architecture de Test auto}
-        %%%%%% Frame 11 %%%%%%
+        %%%%%% Frame 14 %%%%%%
         \begin{frame}
             \frametitle{Projet Test-Auto : Comment ça marche ?}
             \begin{enumerate}
@@ -319,8 +311,8 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
         \end{frame}
         
         \subsection{Développements Réalisés}
-        %%%%%% Frame 12 %%%%%%
-        \begin{frame}
+        %%%%%% Frame 15 %%%%%%
+        \begin{frame}[t]
             \frametitle{1\textsuperscript{ère} tâche - Automatisation des scénarios de Test avec JUnit}
             \begin{block}{Contenus de tâche}
                 \begin{itemize}
@@ -345,7 +337,7 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
             \end{block}
         \end{frame}
         
-        %%%%%% Frame 13 %%%%%%
+        %%%%%% Frame 16 %%%%%%
         \begin{frame}
             \frametitle{2\textsuperscript{ème} tâche: Comparaison entre deux PDF}
             \begin{columns}
@@ -357,7 +349,7 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
             \end{columns}
         \end{frame}
         
-        %%%%%% Frame 14 %%%%%%
+        %%%%%% Frame 17 %%%%%%
         \begin{frame}
         \frametitle{2\textsuperscript{ème} tâche: Téléchargement de zip, unzip, comparaison de PDF à la fin}
             \begin{block}{Problématique}
@@ -376,6 +368,7 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
             \end{block}
         \end{frame}
         
+         %%%%%% Frame 18 %%%%%%
         \begin{frame}
             \frametitle{2\textsuperscript{ème} tâche: Comparaison entre deux répertoire avec $\lambda$}
             \begin{block}{Problématique}
@@ -396,7 +389,7 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
             \end{block}
         \end{frame}
         
-        %%%%%% Frame 15 %%%%%%
+        %%%%%% Frame 19 %%%%%%
         \begin{frame}[fragile] % fragile option est pour insérer les codes
             \begin{block}{Comparaison entre deux répertoire avec $\lambda$}
             \begin{lstlisting}
@@ -418,7 +411,7 @@ for (int ii = 0; ii < listRefPath.size(); ii++){
         \end{frame}
         
         \subsection{Outils et Technologies utilisés}
-        %%%%%% Frame 16 %%%%%%
+        %%%%%% Frame 20 %%%%%%
         \begin{frame}
         \frametitle{Outils et Technologies utilisés}
             \begin{table}[l]
@@ -439,7 +432,7 @@ for (int ii = 0; ii < listRefPath.size(); ii++){
         \end{frame}
         
     \section{Conclusion}
-        %%%%%% Frame 17 %%%%%%
+        %%%%%% Frame 21 %%%%%%
         \begin{frame}
             \begin{alertblock}{Résultats de travail}
                 \begin{itemize}
@@ -472,7 +465,7 @@ for (int ii = 0; ii < listRefPath.size(); ii++){
             \end{columns}
         \end{frame}
         
-        %%%%%% Frame 18 %%%%%%
+        %%%%%% Frame 22 %%%%%%
         \begin{frame}
             \begin{center}
                 \LARGE{\textbf{Merci pour votre attention }} \textasciicircum\_\textasciicircum
