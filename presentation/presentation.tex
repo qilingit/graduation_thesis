@@ -29,7 +29,21 @@
 
 \usepackage{mathtools} % Pour les symbols mathématiques
 
-\title[Soutenance de fin d'études]{Automatisation de Test fonctionnel et de Test Non-régression}
+
+
+  
+\newenvironment<>{shortblock}[2]{.5\textwidth}{
+    \setlength{\textwidth}{##1}
+    \begin{actionenv}##3
+        \def\insertblocktitle{##2}
+        \par
+        \usebeamertemplate{block begin}
+        \par
+        \usebeamertemplate{block end}
+    \end{actionenv}
+}
+
+\title[Soutenance de fin d'études]{Automatisation de Tests fonctionnels}
 
 \author{Qilin ZHANG}
 \institute{Sorbonne Université - Master 2 Informatique STL Alternance}
@@ -69,183 +83,82 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
         \tableofcontents
     \end{frame}
     
-    \section{Présentation d'organisation d'accueil}
-        \subsection{Présentation d'entreprise - SAP}
+    \section{Présentation de l'entreprise et de l'équipe}
+        \subsection{Présentation de SAP}
         
         %%%%%% Frame 1 %%%%%%
-        \begin{frame}
-            \begin{block} {SAP Histoire}
-                SAP SE (Systems, Applications \& Products in Data Processing), fondé par 5 anciens IBM employés en 1972
+        \begin{frame}[t]
+            \begin{block} {Historique de SAP}
+                SAP SE (Systems, Applications \& Products in Data Processing), fondé par 5 anciens employés d'IBM en 1972
             \end{block}
             \includegraphics[width=5cm,]{sap_founders.jpg}
-            \begin{block}{SAP Information}
+            \begin{block}{SAP en 3 points}
             \begin{itemize}
                 \item 1\textsuperscript{er} éditeur de logiciels en Europe et 4\textsuperscript{ème} dans le monde
                 \item Le plus grand fournisseur mondial de logiciels d’application d’entreprise
-                \item Entreprise internationale : Plus de 98000 employés au tour du monde dans plus de 147 pays, plus de 437000 clients dans plus de 180 pays.
+                \item Entreprise internationale : 98000 employés répartis dans 147 pays et 437000 clients de 180 pays.
                 
             \end{itemize}
             \end{block}
-            
-            \begin{block}{SAP France}
-                \begin{columns}
-                \column{0.85\textwidth}
-                \begin{itemize}
-                    \item Locale: \textbf{Tour SAP} 35 rue d’Alsace, 92300 Levallois-Perret
-                    \item Présente plus de 1500 de salariés en temps plein.
-                \end{itemize}
-                
-                \column{0.2\textwidth}
-                \includegraphics[width=\textwidth]{sap-france.jpg}
-                \end{columns}
-            \end{block}
-            
+            \includegraphics[width=0.3\textwidth]{SAP_Best_R_grad_blk.jpg}
         \end{frame}
+       
+       
         
-        %%%%%% Frame 2 %%%%%%
-        \begin{frame}
-            \frametitle{SAP Produits et Slogan}
-            \begin{columns}[t]
-            \column{0.7\textwidth}
-                    \textbf{8 Catégories des produits} en globales : 
-                    \begin{itemize}
-                        \item ERP et coeur numérique
-                        \item Gestion de la relation client et expérience client
-                        \item Réseau et gestion des dépenses
-                        \item Chaîne logistique digitale
-                        \item RH et implication du personnel
-                        \item Plateforme digitale
-                        \item Outils d’analyse
-                        \item Technologies intelligentes
-                    \end{itemize}
-            \column{0.3\textwidth}
-            \textbf{SAP Slogan :} \\ The Best run SAP
-            \flushleft
-            \includegraphics[width=\textwidth]{SAP_Best_R_grad_blk.jpg}
-            \end{columns}
-        \end{frame}
-        
-        %%%%%% Frame 3 %%%%%%
-        \begin{frame}
-            \includegraphics[height=8cm]{SAP_portfolio.png}
-        \end{frame}
-        
-        %%%%%% Frame 4 %%%%%%
-        \begin{frame}[t]
-            \frametitle{SAP Financial Consolidation}
-            \begin{block}{SAP Financial Consolidation}
-            \begin{itemize}
-                \item \textbf{SAP Financial Consolidation}, la catégorie ERP et coeur numérique
-                \item Une application de consolidation légale et de reporting de gestion développée depuis 1999.
-                \item Il permet aux grandes entreprises de répondre à des exigences de consolidation complexes, de rationaliser la conformité réglementaire, d’unifier le reporting légal et de gestion et d’accélérer le processus de clôture financière global
-            \end{itemize}
-            
-            \end{block}
-        \end{frame}
-        
-        %%%%%% Frame 5 %%%%%%
-        \begin{frame}[t]
-            \begin{columns}
-                \column{0.5\textwidth}
-                \begin{figure}
-                    \centering
-                    \includegraphics[width=\textwidth]{FC_pageLogin.JPG}
-                    \caption{Page Login de FC}
-                    \label{fig:FC_login_label}
-                \end{figure}
-                
-                \column{0.5\textwidth}
-                \begin{figure}
-                    \centering
-                    \includegraphics[width=\textwidth]{FC_Homepage.JPG}
-                    \caption{Home page de FC}
-                    \label{fig:FC_homepage_label}
-                \end{figure}
-            \end{columns}
-            
-        \end{frame}
-        
-        \subsection{Introduction d'équipe}
+        \subsection{Mon rôle au sein de l'équipe}
         %%%%%% Frame 6 %%%%%%
-        \begin{frame}
-        \frametitle{Organisation d'équipe et mon rôle}
-            \begin{block}{Rôle et Mission}
-            \begin{itemize}
-                \item Apprenti Ingénieur de Qualité, intégré à l'équipe P\&I S/4HANA LoB Finance France, partie Test de sous-équipe FC
-                \item Equipe plus de 40 personnes, travaillent en méthode d'Agile
-                \item Automatiser des scénarios de tests fonctionnels et de non-régression
-            \end{itemize}
-            
-            \end{block}
-            \includegraphics[width=\textwidth]{role_organisation.jpg}
-        \end{frame}
-        
-    \section{Contexte et la problématique}
-        \subsection{SAP Financial Consolidation}
-        %%%%%% Frame 7 %%%%%%
-        \begin{frame}
-            \frametitle{Architecture de SAP Financial Consolidation}
-            \includegraphics[width=0.84\textwidth]{FC_Globale_Architecture.png}
-        \end{frame}
-        
-        %%%%%% Frame 8 %%%%%%
         \begin{frame}[t]
-        \frametitle{Différentes versions du client}
-            \begin{description}
-                \item [Client Windows Desktop :] Client installer sur Windows
-                \item [Client Legacy Web :] Client version Web avant l'utilisation de HTML5
-                \item [Client HTML5 Web :] Client version Web avec l'utilisation de HTML5, nouvelle UX, sortie depuis FC 10.1 à partir de 2015, continuer à développer les nouvelles fonctionnalités et faire les maintenances.
-            \end{description}
+        \frametitle{Mon rôle au sein de l'équipe P\&I LoB Finance}
+            \begin{block}{Equipe}
+                \begin{itemize}
+                    \item Apprenti Ingénieur Qualité intégré au sein de  l'équipe P\&I S/4HANA LoB Finance France. Elle est composée d'une quarantaine de personnes qui utilisent SCRUM comme méthode de travail.
+                    \item Développement et maintenance de SAP Financial Consolidation (FC), une application de consolidation financière et de reporting de gestion développée depuis 1999.
+                \end{itemize}
+            \end{block}
         \end{frame}
+    
+        \begin{frame}{Mon rôle au sein de l'équipe P\&I LoB Finance}
+            \begin{block}{Mon rôle}
+                \begin{itemize}
+                    \item Automatiser des scénarios de tests fonctionnels et tests de non-régression pour le client FC Web HTML5.
+                \end{itemize}
+            \end{block}
+            \includegraphics[width=12cm]{role_organisation.jpg}
+        \end{frame}
+        
+    \section{Contexte et problématique}
+
         
         %%%%%% Frame 9 %%%%%%
-        \subsection{Test de nouvelles fonctionnalités et Test non-régression}
-        \begin{frame}
-            \frametitle{Le cycle de Build - Test - Release}
-            \begin{columns}
-                \column{0.6\textwidth}
-                \centering
-                \includegraphics[width=8cm]{cycle_build_release.png}
-                
-                \column{0.4\textwidth}
-                \textbf{Différentes branches :} 
-                \begin{itemize}
-                    \item Core: Toutes les fonctionnalités
-                    \item PI : La version à tester
-                    \item REL : La version livrerée directement au client
-                \end{itemize}
-            \end{columns}
-        \end{frame}
-        
-        
-        
+        \subsection{Test de nouvelles fonctionnalités et test de non-régression}
         %%%%%% Frame 10 %%%%%%
         \begin{frame}[t]
-            \frametitle{Deux types de Test}
-            \begin{block}{Test de nouvelles fonctionnalités}
-                Test fonctionnel sur des nouvelles fonctionnalités ou les corrections des Bugs
+            \frametitle{Deux types de test}
+            \begin{block}{Test des nouvelles fonctionnalités}
+                Test fonctionnel sur les nouvelles fonctionnalités implémentés lors du dernier sprint.
             \end{block}
             
             \begin{block}{Test de non-régression}
-            Pour s'assurer qu'après une modification, des défauts n'ont pas été introduits ou découverts dans des parties non modifiées.
+            Le but de la non-régression est de s'assurer qu'après une correction de bug, de nouveaux bug n'ont pas été introduits ou découverts dans l'application. \newline
+            \textcolor{orange}{Ces tests durent tout au long du développement du produit, d'où l'intérêt de les automatiser pour libérer du temps de test manuel sur les nouvelles fonctionnalités.}
             \end{block}
             \pause
             %\begin{alertblock}{{\LARGE{Ces deux test assurent la qualité du produit}}}
             
             %\end{alertblock}
             \centering
-            \alert{{\Large{\textbf{Ces deux test assurent la qualité de produit !!!}}}}
+            \alert{{\Large{\textbf{Ces deux types de test assurent la qualité de produit !!!}}}}
         \end{frame}
         
         \subsection{Test d'impression}
         
         %%%%%% Frame 11 %%%%%%
         \begin{frame}
-            \frametitle{Problématique de Test d'impression}
+            \frametitle{Problématique du test d'impression}
             \begin{itemize}
-                \item FC contient la fonctionnalité d'impression des rapports,  le \textit{\textbf{test de non-régression}} assure la qualité de cette fonctionnalité.
+                \item FC contient une fonctionnalité d'impression des rapports, ces rapports sont au format PDF, le \textit{\textbf{test de non-régression}} doit assuré la qualité de cette fonctionnalité.
                 \pause
-                \item Vérifie si l'impression de différente version donne le même résultat, indique la différence s'ils sont différents
+                \item Vérifier si l'impression de différentes versions de rapports donnent les mêmes résultats, et le test doit indiquer les différences s'il en trouve.
             \end{itemize}
              
             \begin{figure}[H]
@@ -258,88 +171,85 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
         
         %%%%%% Frame 12 %%%%%%
         \begin{frame}[t]
-            \frametitle{Etat de l'art}
-            \begin{block}{Etat de travail}
+            \frametitle{Etat de travail}
+            \begin{block}{Etat des tests d'impression avant mon arrivée}
                 \begin{itemize}
-                    \item Avant mon arrive, l'équipe a fait ce test manuellement. Facile d’être fatigué faces aux scénarios répétés, perdre beaucoup de temps. 
-                    \item Projet de test-auto en langage Java et plusieurs autres technologies a été développé depuis quelques années, continue à couvrir plus de fonctionnalités.
+                    \item Avant mon arrivée, l'équipe faisait ces tests manuellement. L'exécution répéter de ces scénarios entraînait un risque d'erreur humaine important dans la comparaison des fichiers PDF ainsi qu'une perte de temps, d'où le besoin d'automatiser ces tests.
+                    \item Le projet de Test-Auto utilisant le langage Java et plusieurs autres technologies a été développé depuis quelques années, et il continue à couvrir de plus en plus de fonctionnalités du produit.
                 \end{itemize}
             \end{block}
-            \pause
-            
-            \begin{block}{Statut d'autres équipes de SAP France}
-                \begin{itemize}
-                    \item L'autre équipe a fait le projet de la comparaison entre deux fichier pdf pixel par pixel en Java, en utilisant une bibliothèque open source ice-pdf.
-                \end{itemize}
-            \end{block}
-            
         \end{frame}
-         %%%%%% Frame 13 %%%%%%
-        \begin{frame}{Choix des technologies pour le Projet Test-Auto}
-            \begin{block}{Silk Test, Selenium dans future}
+        
+        \begin{frame}[t]{Etat de travail}
+            \begin{block}{Statut des autres équipes de SAP France}
                 \begin{itemize}
-                    \item \textbf{Silk Test est choisit}:
-                        \begin{enumerate}
-                            \item Cette technologie est déjà utilisée par l'autre équipe de SAP avant le commence de projet test-auto
-                            \item Java a été de préférence du développeur pour commencer le projet.
-                        \end{enumerate}
-                    \item \textbf{Selenium pour le future} : Open-source, multiplateforme, plusieurs langages : Java, C\#, Perl, Python, JavaScript, Rudy, PHP, etc.
+                    \item Une autre équipe a travaillé sur un projet de comparaison entre deux fichier PDFs pixel par pixel en Java. Ils utilisent la bibliothèque \textit{ice-pdf}, qui génère une image indiquant la différence entre les deux fichiers comparés.
+                    \item Cette solution ayant fait ces preuves, nous avons décidé de la récupérer et de l'adapter à nos besoin pour notre projet Test-Auto.
                 \end{itemize}
             \end{block}
-            
-            \begin{block}{Comparaison par Pixel, pas de Checksum du fichier}
-                \begin{itemize}
-                    \item \textbf{Checksum}: Rapide, mais ne peut pas inquer la différence
-                    \item \textbf{Comparaison par Pixel}: Plus difficile à programmer, mais c'est gérable, en plus, peut indiquer la différence.
-                \end{itemize}
-            \end{block}
-            
         \end{frame}
-    \section{Travaux Réalisés}
-        \subsection{Architecture de Test auto}
+    
+        
+    \section{Travaux réalisés}
+        \subsection{Architecture du projet Test-Auto}
         %%%%%% Frame 14 %%%%%%
-        \begin{frame}
+        \begin{frame}[t]
             \frametitle{Projet Test-Auto : Comment ça marche ?}
-            \begin{enumerate}
-                \item \textcolor{orange}{3} types de machines virtuelles pour business-logic : \textit{\textbf{Base de Donnée}}, \textit{\textbf{ressources de références}}, \textit{\textbf{Jenkins slave}}; \textcolor{orange}{1} machine virtuelle pour sauvegarder  les \textit{\textbf{logs}} dans une base de donnée, puis visualiser en Excel
-                \item Codes sources en Java, manipulé par Perforce
-                \item Un Jenkins master lancer le projet
-            \end{enumerate}
-        
-            \centering
-            \includegraphics[width=9.5cm]{TestAuto_architecture.png}
+            \begin{itemize}
+                \item Projet Test-Auto est un projet configuré par Jenkins et plusieurs types de machines virtuelles : 
+                    \begin{enumerate}
+                        \item \textbf{VM de Jenkins serveur:} Contient toutes les configurations de Jenkins pour le projet Test-Auto.
+                        \item \textbf{VM du DB de FC: } La DB de FC: Hana, Oracle 12, SQL Server.
+                        \item \textbf{VM de ressources:} Contient toutes les ressources que les test automatisé a besoin.
+                        \item \textbf{VM du DB de Reporting:} La DB sauvegarde les logs de tests, et visualiser ces logs au rapport Excel.
+                        \item \textbf{VM de Test:} L'environnement de test avec les logiciels et bibliothèques installés: Windows, Jenkins slave, Maven, FC client, IE, Chrom, Firefox.
+                    \end{enumerate} 
+            \end{itemize}
         \end{frame}
         
-        \subsection{Développements Réalisés}
+        \begin{frame}[t]
+            \frametitle{Projet Test-Auto : Comment ça marche ?}
+            \begin{block}{La procédure d'un test automatisé}
+                \begin{enumerate}
+                    \item Jenkins déclenche la restauration de DB de FC sur la VM de Test
+                    \item Jenkins déclenche la récupération des ressources de la VM de ressources
+                    \item Jenkins déclenche le test sur la VM de Test
+                    \item Jenkins déclenche la remontée des résultats de test dans la DB de Reporting
+                \end{enumerate}
+            \end{block}
+        \end{frame}
+        
+        \begin{frame}{Projet Test-Auto : Comment ça marche ?}
+            \centering
+            \includegraphics[width=10cm]{TestAuto_architecture.png}
+        \end{frame}
+        
+        \subsection{Développements réalisés}
         %%%%%% Frame 15 %%%%%%
         \begin{frame}[t]
-            \frametitle{1\textsuperscript{ère} tâche - Automatisation des scénarios de Test avec JUnit}
-            \begin{block}{Contenus de tâche}
+            \frametitle{Automatisation des scénarios de test avec Silktest}
+            \begin{block}{Contenus de la tâche}
                 \begin{itemize}
-                    \item Lire et comprendre les codes existants du projet.
-                    \item Programmer des tests de Junit avec langage Java, l'intègre dans projet de test-auto.
+                    \item Lire et comprendre le code existant du projet Test-Auto.
+                    \item Implémentions de nouveaux scénarios de test en utilisant les technologies déjà misent en place pour le projet Test-Auto: Silktest (Silk4J), Junit, Maven, Jenkins.
                 \end{itemize}
             \end{block}
             
             \pause
-            \begin{block}{Résultats}
-                \begin{itemize}
-                    \item Des scénarios de test bien finis et intégrés dans le projet Test-Auto
-                    \item \begin{enumerate}
-                        \item Bien compris l'architecture de Test-auto, comment le projet Test-auto fonctionne
-                        \item Bien compris et pratiqué les technologies utilisées dans le projet : 
+            \begin{block}{Résultats des premières tâches effectués}
+                \begin{enumerate}
+                        \item Bonne compréhension de l'architecture des Test-auto
+                        \item Apprentissage du développement avec Silktest: 
                             \begin{itemize}
-                                \item Comment les contrôles d'application sont reconnues par XPath.
-                                \item Comment SilkTest déclenchhe les navigateurs: IE, Chrome, MS Edge.
+                                \item Comment Silktest interagi avec les contrôles de l'application en écrivant des requêtes XPath.
                             \end{itemize}
                     \end{enumerate}
-                \end{itemize}
             \end{block}
         \end{frame}
         
         %%%%%% Frame 16 %%%%%%
         \begin{frame}
-            \frametitle{2\textsuperscript{ème} tâche: Comparaison entre deux PDF}
+            \frametitle{Comparaison entre deux PDF}
             \begin{columns}
             \column{0.7\textwidth}
             \includegraphics[width=8cm]{process_compar_pdf.png}
@@ -349,49 +259,84 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
             \end{columns}
         \end{frame}
         
+        
+        
+        \begin{frame}[t]{Comparaison entre deux PDF}
+            \begin{block}{Résultat}
+                \begin{itemize}
+                    \item Les erreurs de test sont affichés dans les logs de test
+                        \begin{enumerate}
+                            \item Dans l'image de gauche, "OK" désigne un test qui passe bien et "ERROR" veut dire qu'il y a une différence dans le rapport.
+                            \item Dans l'image de droite on voit les différences entre les rapports.
+                        \end{enumerate}
+                \end{itemize}
+            \end{block}
+            \begin{columns}
+                \column{0.5\textwidth}
+                \begin{figure}
+                    \centering
+                    \includegraphics[height=2.65cm]{test_result.PNG}
+                    \caption{Résultat de test}
+                    \label{fig:result_test_label}
+                \end{figure}
+                
+                \column{0.5\textwidth}
+                \begin{figure}
+                    \centering
+                    \includegraphics[height=2.3cm]{test_error_detail.PNG}
+                    \caption{Détaille d'une erreur}
+                    \label{fig:result_error_detail_label}
+                \end{figure}
+            \end{columns}
+        \end{frame}
+        
         %%%%%% Frame 17 %%%%%%
         \begin{frame}
-        \frametitle{2\textsuperscript{ème} tâche: Téléchargement de zip, unzip, comparaison de PDF à la fin}
+        \frametitle{Téléchargement de zip, unzip, comparaison de PDF}
             \begin{block}{Problématique}
                 \begin{itemize}
-                    \item Pour cer tains scénario de tests, ils demandent FC télécharge un zip
-                    \item Le nom de ce zip contient un GUID\textit{(globally unique identifier)} suffixe. 
-                    \item Ce zip contient un nombre connu des fichiers en pdf avec le même GUID comme préfixe. Les noms des fichiers après décompression sont déjà donnés en ordre de temps de création dans le scénarios.
+                    \item Pour certains scénario de tests nous avons besoin de télécharger un fichier zip.
+                    \item Le suffix du nom de ce zip contient un GUID\textit{(globally unique identifier)}. 
+                    \item Ce zip contient un nombre connu de fichiers au format pdf qui ont tous le même GUID comme préfixe.
                 \end{itemize}
             \end{block}
             \pause
             \begin{block}{Solution}
                 \begin{itemize}
-                    \item Utiliser la bibliothèque \textit{java.util.zip.ZipEntry} et \textit{java.util.zip.ZipInputStream} afin de décompresser le zip
-                    \item Trier les fichiers en temps de créations puis les renommer avec les noms donnés, ensuite faire la comparaison. Pour trier, j'utilise $\lambda$-Expression.
+                    \item Utilisation de la bibliothèque \textit{java.util.zip.ZipEntry} et \textit{java.util.zip.ZipInputStream} afin de décompresser le zip.
+                    \item Triage des fichiers par date de créations puis renommage des noms par ceux défini dans les scénarios. Pour trier, j'utilise les $\lambda$-Expression.
+                    \item Comparaison des fichiers avec les références. 
                 \end{itemize}
             \end{block}
         \end{frame}
         
          %%%%%% Frame 18 %%%%%%
-        \begin{frame}
-            \frametitle{2\textsuperscript{ème} tâche: Comparaison entre deux répertoire avec $\lambda$}
+        \begin{frame}[t]
+            \frametitle{Comparaison de deux répertoire avec $\lambda$-Expression}
             \begin{block}{Problématique}
                 \begin{itemize}
-                    \item La même demande de téléchargement du zip
-                    \item Mais on ne sait pas le nom ou le préfixe de nom, ni le nombre des fichiers PDFs dans le zip.
-                    \item Autrement dit, ça nous demande de comparer entre deux zip, ils ont le même nombre des PDFs, et ces PDFs ont les même noms.
+                    \item Téléchargement d'un fichier zip
+                    \item Nom des fichiers PDF inconnus, ainsi que leur nombre dans ce zip.
+                    \item Autrement dit, nous devons comparer le contenu des deux zip (ils ont le même nombre des PDFs, les PDFs ont les mêmes noms).
                 \end{itemize}
             \end{block}
-            
-            \pause
-            \begin{block}{solution $\lambda$}
+        \end{frame}
+        
+        \begin{frame}[t]
+            \frametitle{Comparaison de deux répertoire avec $\lambda$-Expression}
+            \begin{block}{Solution $\lambda$-Expression}
                 \begin{enumerate}
-                    \item Décompresser le zip téléchargé, garde comme répertoire de référence.
-                    \item Parcourir le répertoire de référence et mettre tous les fichiers PDF dans une liste
-                    \item Parcourir le répertoire de source, en prenant la liste des PDF de référence, trouver le PDF avec le même nom, ensuite faire la comparaison en appelant la fonction de comparaison PDF développé.
+                    \item Décompresser le zip téléchargé, et le garder comme répertoire source.
+                    \item Parcourir le répertoire de référence et mettre tous les fichiers PDF dans une liste.
+                    \item  En prenant chaque élément de cette liste, parcourir le répertoire source, trouver le PDF avec le même nom, puis faire la comparaison en appelant la fonction de comparaison PDF déjà développé.
+                    \item Si le nombre de fichier est différent, ou les noms ne sont pas les mêmes, il y aura une Exception Java.
                 \end{enumerate}
             \end{block}
         \end{frame}
         
         %%%%%% Frame 19 %%%%%%
         \begin{frame}[fragile] % fragile option est pour insérer les codes
-            \begin{block}{Comparaison entre deux répertoire avec $\lambda$}
+            \begin{block}{Comparaison entre deux répertoire avec $\lambda$-Expression}
             \begin{lstlisting}
 Path dirRef = Paths.get(refFolder);
 Path dirSrc = Paths.get(srcFolder);
@@ -410,21 +355,21 @@ for (int ii = 0; ii < listRefPath.size(); ii++){
             \end{block}
         \end{frame}
         
-        \subsection{Outils et Technologies utilisés}
+        \subsection{Outils et technologies utilisés}
         %%%%%% Frame 20 %%%%%%
         \begin{frame}
-        \frametitle{Outils et Technologies utilisés}
+        \frametitle{Outils et technologies utilisés}
             \begin{table}[l]
                 \centering
-                \begin{tabular}{|l|c|c|c|}
+                \begin{tabular}{|l|c|c|c|c|}
                     \hline
-                    IDE & \includegraphics[width=2cm]{Eclipse_logo.png} & & \\
+                    IDE & \includegraphics[width=1.6cm]{Eclipse_logo.png} & & &\\
                     \hline
-                    Communication &  \includegraphics[width=2cm]{Skype_for_Business_logo.png} & \includegraphics[width=2cm]{Outlook_logo.png} & \\
+                    Communication &  \includegraphics[width=1.6cm]{Skype_for_Business_logo.png} & \includegraphics[width=1.6cm]{Outlook_logo.png} & & \\
                     \hline
-                    Partager & \includegraphics[width=2cm]{Perforce_Logo.jpg} & \includegraphics[width=2cm]{OneDriveLogo.png} & \includegraphics[width=2cm]{OneNoteLogo.png}\\
+                    Partager & \includegraphics[width=1.6cm]{Perforce_Logo.jpg} & \includegraphics[width=1.6cm]{OneDriveLogo.png} & \includegraphics[width=1.6cm]{OneNoteLogo.png} &\\
                     \hline
-                    Outils \& Bibliothèque & \includegraphics[width=2cm]{junit-logo.png} & \includegraphics[width=2cm]{silktest_logo.png} & \includegraphics[width=2cm]{jenkins_logo.png} \\
+                    Outils \& Bibliothèques & \includegraphics[width=1.6cm]{junit-logo.png} & \includegraphics[width=1.6cm]{Maven_logo.png} & \includegraphics[width=1.6cm]{jenkins_logo.png}& \includegraphics[width=1.6cm]{silktest_logo.png}  \\
                     \hline
                 \end{tabular}
                 \label{tab:my_label}
@@ -433,36 +378,16 @@ for (int ii = 0; ii < listRefPath.size(); ii++){
         
     \section{Conclusion}
         %%%%%% Frame 21 %%%%%%
-        \begin{frame}
+        \begin{frame}[t]
             \begin{alertblock}{Résultats de travail}
                 \begin{itemize}
-                    \item Les scénarios de test de 1\textsuperscript{ère} tâches sont bien intégrés dans le projet
-                    \item Le projet de test d'impression est bien intégré dans le projet et tourne bien sur le projet Test-auto
-                    \item Les erreurs de test sont affichés dans les logs de test
-                    \begin{enumerate}
-                        \item L'image à gauche, "OK" veut dire que le test passe bien, "ERROR" veut dire que le test ne passe pas ou une différence dans le rapport
-                        \item L'image à droite indique les détailles d'erreur, la différence de rapport.
-                    \end{enumerate}
+                    \item Les scénarios de test de la première tâches sont bien intégrés dans le projet
+                    \item Le projet de test d'impression est bien intégré dans le projet et il fonctionne bien sur le projet Test-auto
+                    
                 \end{itemize}
             \end{alertblock}
             
-            \begin{columns}
-                \column{0.5\textwidth}
-                \begin{figure}
-                    \centering
-                    \includegraphics[height=2.4cm]{test_result.PNG}
-                    \caption{Résultat de test}
-                    \label{fig:result_test_label}
-                \end{figure}
-                
-                \column{0.5\textwidth}
-                \begin{figure}
-                    \centering
-                    \includegraphics[height=2.2cm]{test_error_detail.PNG}
-                    \caption{Détaille d'une erreur}
-                    \label{fig:result_error_detail_label}
-                \end{figure}
-            \end{columns}
+            
         \end{frame}
         
         %%%%%% Frame 22 %%%%%%
