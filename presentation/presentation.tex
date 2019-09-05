@@ -156,7 +156,7 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
         \begin{frame}
             \frametitle{Problématique du test d'impression}
             \begin{itemize}
-                \item FC contient une fonctionnalité d'impression des rapports, ces rapports sont au format PDF, le \textit{\textbf{test de non-régression}} doit assuré la qualité de cette fonctionnalité.
+                \item FC contient une fonctionnalité d'impression des rapports, ces rapports sont au format PDF, le \textit{\textbf{test de non-régression}} doit assurer la qualité de cette fonctionnalité.
                 \pause
                 \item Vérifier si l'impression de différentes versions de rapports donnent les mêmes résultats, et le test doit indiquer les différences s'il en trouve.
             \end{itemize}
@@ -174,7 +174,7 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
             \frametitle{Etat de travail}
             \begin{block}{Etat des tests d'impression avant mon arrivée}
                 \begin{itemize}
-                    \item Avant mon arrivée, l'équipe faisait ces tests manuellement. L'exécution répéter de ces scénarios entraînait un risque d'erreur humaine important dans la comparaison des fichiers PDF ainsi qu'une perte de temps, d'où le besoin d'automatiser ces tests.
+                    \item Avant mon arrivée, l'équipe faisait ces tests manuellement. L'exécution répétée de ces scénarios entraînait un risque d'erreur humaine important dans la comparaison des fichiers PDF ainsi qu'une perte de temps, d'où le besoin d'automatiser ces tests.
                     \item Le projet de Test-Auto utilisant le langage Java et plusieurs autres technologies a été développé depuis quelques années, et il continue à couvrir de plus en plus de fonctionnalités du produit.
                 \end{itemize}
             \end{block}
@@ -199,7 +199,7 @@ Tuteur universitaire: Emmanuel CHAILLOUX, Binh-Minh BUI-XUAN
                 \item Projet Test-Auto est un projet configuré par Jenkins et plusieurs types de machines virtuelles : 
                     \begin{enumerate}
                         \item \textbf{VM de Jenkins serveur:} Contient toutes les configurations de Jenkins pour le projet Test-Auto.
-                        \item \textbf{VM du DB de FC: } La DB de FC: Hana, Oracle 12, SQL Server.
+                        \item \textbf{VM du DB de FC: } La DB de FC: SAP HANA, Oracle 12, Microsoft SQL Server.
                         \item \textbf{VM de ressources:} Contient toutes les ressources que les test automatisé a besoin.
                         \item \textbf{VM du DB de Reporting:} La DB sauvegarde les logs de tests, et visualiser ces logs au rapport Excel.
                         \item \textbf{VM de Test:} L'environnement de test avec les logiciels et bibliothèques installés: Windows, Jenkins slave, Maven, FC client, IE, Chrom, Firefox.
